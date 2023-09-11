@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 
 import { fetchPost } from "../functions/posts.js";
 
+import Post from "../components/Post.js";
+
 export default function Singlepost() {
   const [post, setPost] = useState({});
   const { index } = useParams();
@@ -13,8 +15,7 @@ export default function Singlepost() {
 
   return (
     <div>
-      <h1>{post.title?.rendered}</h1>
-      <div dangerouslySetInnerHTML={{ __html: post.content?.rendered }} />
+      <Post post={post} />
     </div>
   );
 }
