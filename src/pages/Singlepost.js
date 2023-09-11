@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { WORDPRESS_URL } from "../config.js";
 
-async function fetchPost(index, stateSetter) {
-  const response = await fetch(WORDPRESS_URL + "wp/v2/posts");
-  const data = await response.json();
-  const post = data[index] ?? {};
-  stateSetter(post);
-}
+import { fetchPost } from "../functions/posts.js";
 
 export default function Singlepost() {
   const [post, setPost] = useState({});
   const { index } = useParams();
 
   useEffect(() => {
-    fetchPost(index, setPost);
+    fetchPost(setPost, Number(index) || 0);
   }, []);
 
   return (

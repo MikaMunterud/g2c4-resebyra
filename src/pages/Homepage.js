@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { WORDPRESS_URL } from "../config.js";
+
+import { fetchPost } from "../functions/posts.js";
 
 export default function Homepage() {
   const [posts, setPosts] = useState([]);
 
   useEffect(function () {
-    async function fetchPosts() {
-      const response = await fetch(`${WORDPRESS_URL}wp/v2/posts`);
-
-      const data = await response.json();
-      setPosts(data);
-      console.log(data);
-    }
-
-    console.log(posts);
-
-    fetchPosts();
+    fetchPost(setPosts);
   }, []);
 
   return (
