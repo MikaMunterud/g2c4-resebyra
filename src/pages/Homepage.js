@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
-
-const WORDPRESS_URL = process.env.REACT_APP_WORDPRESS_URL;
+import React, { useEffect, useState } from "react";
+import { WORDPRESS_URL } from "../config.js";
 
 export default function Homepage() {
   const [posts, setPosts] = useState([]);
@@ -18,4 +17,15 @@ export default function Homepage() {
 
     fetchPosts();
   }, []);
+
+  return (
+    <div>
+      {posts.map((post) => (
+        <div key={`post${post.id}`}>
+          <h2>{post.title.rendered}</h2>
+          <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
+        </div>
+      ))}
+    </div>
+  );
 }
